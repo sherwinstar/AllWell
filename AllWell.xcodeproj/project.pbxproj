@@ -106,13 +106,13 @@
 				4868AD8F2897EC72001E400E /* SceneDelegate.m */,
 				4868AD912897EC72001E400E /* AWMainViewController.h */,
 				4868AD922897EC72001E400E /* AWMainViewController.m */,
+				4868B0582897EF8D001E400E /* AWDetailViewController.h */,
+				4868B0592897EF8D001E400E /* AWDetailViewController.m */,
 				4868AD942897EC72001E400E /* Main.storyboard */,
 				4868AD972897EC74001E400E /* Assets.xcassets */,
 				4868AD992897EC74001E400E /* LaunchScreen.storyboard */,
 				4868AD9C2897EC74001E400E /* Info.plist */,
 				4868AD9D2897EC74001E400E /* main.m */,
-				4868B0582897EF8D001E400E /* AWDetailViewController.h */,
-				4868B0592897EF8D001E400E /* AWDetailViewController.m */,
 			);
 			path = AllWell;
 			sourceTree = "<group>";
@@ -439,6 +439,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -467,6 +468,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

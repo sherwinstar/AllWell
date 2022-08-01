@@ -39,7 +39,7 @@ static const CGFloat kImageFadeDuration = 0.6;
  *  @param url            图片url
  *  @param placeholder    占位图
  *  @param animated       淡入淡出动画
- *  @param completedBlock 图片加载完成Block
+ *  @param completed 图片加载完成Block
  */
 - (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder animated:(BOOL)animated completed:(void (^)(UIImage *image))completed {
     __weak typeof(self) weakSelf = self;

@@ -11,7 +11,7 @@
 
 #define kTokenError -10000011
 
-const static NSString *baseURL = @"http://test2api.hipcapi.com";
+const static NSString *baseURL = @"https://api.sograce.ltd:8443";
 
 @implementation AWNetwork
 

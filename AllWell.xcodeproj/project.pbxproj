@@ -27,6 +27,7 @@
 		48973F9428997CC300A3C162 /* AWNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 48973F9228997CC300A3C162 /* AWNetwork.m */; };
 		48973F9828997D6D00A3C162 /* AWDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 48973F9728997D6D00A3C162 /* AWDataHelper.m */; };
 		48973F9C28997E3200A3C162 /* AWUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48973F9A28997E3200A3C162 /* AWUserModel.m */; };
+		48973F9F2899871800A3C162 /* AWLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48973F9E2899871800A3C162 /* AWLoginViewController.m */; };
 		F8E62F31B3D16F0CBFDBE332 /* Pods_AllWell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1365069E0F41FC94095C2D89 /* Pods_AllWell.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,8 @@
 		48973F9728997D6D00A3C162 /* AWDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWDataHelper.m; sourceTree = "<group>"; };
 		48973F9A28997E3200A3C162 /* AWUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWUserModel.m; sourceTree = "<group>"; };
 		48973F9B28997E3200A3C162 /* AWUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWUserModel.h; sourceTree = "<group>"; };
+		48973F9D2899871800A3C162 /* AWLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWLoginViewController.h; sourceTree = "<group>"; };
+		48973F9E2899871800A3C162 /* AWLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWLoginViewController.m; sourceTree = "<group>"; };
 		9CB0381DBBFFC0C5C2BB83C9 /* Pods-AllWell.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllWell.release.xcconfig"; path = "Target Support Files/Pods-AllWell/Pods-AllWell.release.xcconfig"; sourceTree = "<group>"; };
 		D7A932AA591C17C47BB39541 /* Pods-AllWell.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllWell.debug.xcconfig"; path = "Target Support Files/Pods-AllWell/Pods-AllWell.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,6 +128,8 @@
 				4868AD992897EC74001E400E /* LaunchScreen.storyboard */,
 				4868AD9C2897EC74001E400E /* Info.plist */,
 				4868AD9D2897EC74001E400E /* main.m */,
+				48973F9D2899871800A3C162 /* AWLoginViewController.h */,
+				48973F9E2899871800A3C162 /* AWLoginViewController.m */,
 			);
 			path = AllWell;
 			sourceTree = "<group>";
@@ -315,6 +320,7 @@
 			files = (
 				4868B06F2898277B001E400E /* UIImageView+Loading.m in Sources */,
 				4868AD932897EC72001E400E /* AWMainViewController.m in Sources */,
+				48973F9F2899871800A3C162 /* AWLoginViewController.m in Sources */,
 				4868B0732898277B001E400E /* NSMutableArray+AW.m in Sources */,
 				4868B0762898277B001E400E /* NSDictionary+AW.m in Sources */,
 				4868B0702898277B001E400E /* NSDictionary+Utils.m in Sources */,

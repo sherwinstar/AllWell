@@ -24,6 +24,9 @@
 		4868B0742898277B001E400E /* UIColor+RGBA.m in Sources */ = {isa = PBXBuildFile; fileRef = 4868B0692898277B001E400E /* UIColor+RGBA.m */; };
 		4868B0752898277B001E400E /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4868B06A2898277B001E400E /* NSURL+Utils.m */; };
 		4868B0762898277B001E400E /* NSDictionary+AW.m in Sources */ = {isa = PBXBuildFile; fileRef = 4868B06B2898277B001E400E /* NSDictionary+AW.m */; };
+		48973F9428997CC300A3C162 /* AWNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 48973F9228997CC300A3C162 /* AWNetwork.m */; };
+		48973F9828997D6D00A3C162 /* AWDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 48973F9728997D6D00A3C162 /* AWDataHelper.m */; };
+		48973F9C28997E3200A3C162 /* AWUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48973F9A28997E3200A3C162 /* AWUserModel.m */; };
 		F8E62F31B3D16F0CBFDBE332 /* Pods_AllWell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1365069E0F41FC94095C2D89 /* Pods_AllWell.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +65,12 @@
 		4868B06C2898277B001E400E /* UIImageView+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Loading.h"; sourceTree = "<group>"; };
 		4868B06D2898277B001E400E /* NSMutableDictionary+AW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+AW.h"; sourceTree = "<group>"; };
 		4868B07728982A16001E400E /* AWGeneralMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWGeneralMacro.h; sourceTree = "<group>"; };
+		48973F9228997CC300A3C162 /* AWNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWNetwork.m; sourceTree = "<group>"; };
+		48973F9328997CC300A3C162 /* AWNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWNetwork.h; sourceTree = "<group>"; };
+		48973F9628997D6D00A3C162 /* AWDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWDataHelper.h; sourceTree = "<group>"; };
+		48973F9728997D6D00A3C162 /* AWDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWDataHelper.m; sourceTree = "<group>"; };
+		48973F9A28997E3200A3C162 /* AWUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWUserModel.m; sourceTree = "<group>"; };
+		48973F9B28997E3200A3C162 /* AWUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWUserModel.h; sourceTree = "<group>"; };
 		9CB0381DBBFFC0C5C2BB83C9 /* Pods-AllWell.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllWell.release.xcconfig"; path = "Target Support Files/Pods-AllWell/Pods-AllWell.release.xcconfig"; sourceTree = "<group>"; };
 		D7A932AA591C17C47BB39541 /* Pods-AllWell.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllWell.debug.xcconfig"; path = "Target Support Files/Pods-AllWell/Pods-AllWell.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +108,9 @@
 		4868AD8A2897EC72001E400E /* AllWell */ = {
 			isa = PBXGroup;
 			children = (
+				48973F9928997E3200A3C162 /* Model */,
+				48973F9528997D6D00A3C162 /* Helper */,
+				48973F9128997CC300A3C162 /* Network */,
 				4868B05B2898277B001E400E /* Utils */,
 				4868AD8B2897EC72001E400E /* AppDelegate.h */,
 				4868AD8C2897EC72001E400E /* AppDelegate.m */,
@@ -121,26 +133,53 @@
 			isa = PBXGroup;
 			children = (
 				4868B07728982A16001E400E /* AWGeneralMacro.h */,
-				4868B06D2898277B001E400E /* NSMutableDictionary+AW.h */,
-				4868B0632898277B001E400E /* NSMutableDictionary+AW.m */,
-				4868B06C2898277B001E400E /* UIImageView+Loading.h */,
-				4868B0642898277B001E400E /* UIImageView+Loading.m */,
-				4868B05D2898277B001E400E /* NSDictionary+Utils.h */,
-				4868B0652898277B001E400E /* NSDictionary+Utils.m */,
 				4868B05C2898277B001E400E /* UIView+Size.h */,
 				4868B0662898277B001E400E /* UIView+Size.m */,
-				4868B05F2898277B001E400E /* NSString+Utils.h */,
-				4868B0672898277B001E400E /* NSString+Utils.m */,
-				4868B05E2898277B001E400E /* NSMutableArray+AW.h */,
-				4868B0682898277B001E400E /* NSMutableArray+AW.m */,
-				4868B0622898277B001E400E /* UIColor+RGBA.h */,
-				4868B0692898277B001E400E /* UIColor+RGBA.m */,
 				4868B0612898277B001E400E /* NSURL+Utils.h */,
 				4868B06A2898277B001E400E /* NSURL+Utils.m */,
+				4868B05F2898277B001E400E /* NSString+Utils.h */,
+				4868B0672898277B001E400E /* NSString+Utils.m */,
+				4868B0622898277B001E400E /* UIColor+RGBA.h */,
+				4868B0692898277B001E400E /* UIColor+RGBA.m */,
+				4868B05D2898277B001E400E /* NSDictionary+Utils.h */,
+				4868B0652898277B001E400E /* NSDictionary+Utils.m */,
+				4868B06C2898277B001E400E /* UIImageView+Loading.h */,
+				4868B0642898277B001E400E /* UIImageView+Loading.m */,
 				4868B0602898277B001E400E /* NSDictionary+AW.h */,
 				4868B06B2898277B001E400E /* NSDictionary+AW.m */,
+				4868B05E2898277B001E400E /* NSMutableArray+AW.h */,
+				4868B0682898277B001E400E /* NSMutableArray+AW.m */,
+				4868B06D2898277B001E400E /* NSMutableDictionary+AW.h */,
+				4868B0632898277B001E400E /* NSMutableDictionary+AW.m */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		48973F9128997CC300A3C162 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				48973F9228997CC300A3C162 /* AWNetwork.m */,
+				48973F9328997CC300A3C162 /* AWNetwork.h */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		48973F9528997D6D00A3C162 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				48973F9628997D6D00A3C162 /* AWDataHelper.h */,
+				48973F9728997D6D00A3C162 /* AWDataHelper.m */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		48973F9928997E3200A3C162 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				48973F9A28997E3200A3C162 /* AWUserModel.m */,
+				48973F9B28997E3200A3C162 /* AWUserModel.h */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		EF238F110C988044CB8EED69 /* Pods */ = {
@@ -281,12 +320,15 @@
 				4868B0702898277B001E400E /* NSDictionary+Utils.m in Sources */,
 				4868B0712898277B001E400E /* UIView+Size.m in Sources */,
 				4868B0742898277B001E400E /* UIColor+RGBA.m in Sources */,
+				48973F9428997CC300A3C162 /* AWNetwork.m in Sources */,
 				4868AD8D2897EC72001E400E /* AppDelegate.m in Sources */,
 				4868B0752898277B001E400E /* NSURL+Utils.m in Sources */,
 				4868B06E2898277B001E400E /* NSMutableDictionary+AW.m in Sources */,
 				4868AD9E2897EC74001E400E /* main.m in Sources */,
+				48973F9C28997E3200A3C162 /* AWUserModel.m in Sources */,
 				4868B0722898277B001E400E /* NSString+Utils.m in Sources */,
 				4868B05A2897EF8D001E400E /* AWDetailViewController.m in Sources */,
+				48973F9828997D6D00A3C162 /* AWDataHelper.m in Sources */,
 				4868AD902897EC72001E400E /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

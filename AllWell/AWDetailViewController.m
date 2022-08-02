@@ -9,6 +9,8 @@
 
 @interface AWDetailViewController ()
 
+@property(nonatomic, weak) IBOutlet UIView *contentView;
+
 @end
 
 @implementation AWDetailViewController

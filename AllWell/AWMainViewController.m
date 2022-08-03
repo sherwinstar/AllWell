@@ -6,6 +6,8 @@
 //
 
 #import "AWMainViewController.h"
+#import "AWDataHelper.h"
+#import "AWLoginViewController.h"
 
 @interface AWMainViewController ()
 
@@ -15,6 +17,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([AWDataHelper shared].user == nil) {
+        AWLoginViewController *loginController = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
+        loginController.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self.navigationController presentViewController:loginController animated:NO completion:nil];
+    }
     // Do any additional setup after loading the view.
 }
 

@@ -11,7 +11,7 @@
 
 #define kTokenError -10000011
 
-const static NSString *baseURL = @"https://api.sograce.ltd:8443";
+const static NSString *baseURL = @"https://api.sograce.ltd:8443/api";
 
 @implementation AWNetwork
 
@@ -26,19 +26,9 @@ const static NSString *baseURL = @"https://api.sograce.ltd:8443";
 
 - (nullable NSURLSessionDataTask *)GET:(NSString *)URLString parameters:(nullable id)parameters success:(nullable void (^)(id _Nullable responseObject))success failure:(nullable void (^)(NSString *error))failure{
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:parameters];
-    [dict setObject:@"ios" forKey:@"platform"];
-    [dict setObject:@"hipc" forKey:@"app"];
     NSMutableDictionary *headers = [NSMutableDictionary dictionary];
-    if (AWDataHelper.shared.user && AWDataHelper.shared.user.token.length) {
-        NSString *userId = [NSString stringWithFormat:@"%lu", (unsigned long)AWDataHelper.shared.user.user_id];
-        [headers setObject:AWDataHelper.shared.user.token forKey:@"token"];
-        [headers setObject:userId forKey:@"user-id"];
-        [headers setObject:AWDataHelper.shared.user.token_type forKey:@"token-type"];
-        [headers setObject:@"ios" forKey:@"platform"];
-        [headers setObject:AWDataHelper.shared.user.app forKey:@"app"];
-    } else {
-        [headers setObject:@"ios" forKey:@"platform"];
-        [headers setObject:@"hipc" forKey:@"app"];
+    if (AWDataHelper.shared.user && AWDataHelper.shared.user.AccessToken.length) {
+        [headers setObject:AWDataHelper.shared.user.AccessToken forKey:@"token"];
     }
     
     NSURLSessionDataTask *dataTask = [[AFHTTPSessionManager manager] GET:[self getUrl:URLString] parameters:dict headers:headers progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -55,44 +45,15 @@ const static NSString *baseURL = @"https://api.sograce.ltd:8443";
 
 - (nullable NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(nullable id)parameters success:(nullable void (^)(id _Nullable responseObject))success failure:(nullable void (^)(NSString *error))failure {
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:parameters];
-    [dict setObject:@"ios" forKey:@"platform"];
     NSMutableDictionary *headers = [NSMutableDictionary dictionary];
-    if (AWDataHelper.shared.user && AWDataHelper.shared.user.token.length) {
-        NSString *userId = [NSString stringWithFormat:@"%lu", (unsigned long)AWDataHelper.shared.user.user_id];
-        [headers setObject:AWDataHelper.shared.user.token forKey:@"token"];
-        [headers setObject:@"ios" forKey:@"platform"];
-        [headers setObject:AWDataHelper.shared.user.app forKey:@"app"];
-        [headers setObject:userId forKey:@"user-id"];
-        [headers setObject:AWDataHelper.shared.user.token_type forKey:@"token-type"];
+    if (AWDataHelper.shared.user && AWDataHelper.shared.user.AccessToken.length) {
+        [headers setObject:AWDataHelper.shared.user.AccessToken forKey:@"AccessToken"];
     }
-    NSURLSessionDataTask *dataTask = [[AFHTTPSessionManager manager] POST:[self getUrl:URLString] parameters:dict headers:headers progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    NSURLSessionDataTask *dataTask = [manager POST:[self getUrl:URLString] parameters:dict headers:headers progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [self handleResponse:responseObject success:success failure:failure];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (failure) {
-            failure(error.description);
-        }
-    }];
-    
-    [dataTask resume];
-    return dataTask;
-}
-
-- (nullable NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(nullable id)parameters successWithCode:(nullable void (^)(id _Nullable responseObject, NSInteger code))success failure:(nullable void (^)(NSString *error))failure {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:parameters];
-    [dict setObject:@"ios" forKey:@"platform"];
-    NSMutableDictionary *headers = [NSMutableDictionary dictionary];
-    if (AWDataHelper.shared.user && AWDataHelper.shared.user.token.length) {
-        NSString *userId = [NSString stringWithFormat:@"%lu", (unsigned long)AWDataHelper.shared.user.user_id];
-        [headers setObject:AWDataHelper.shared.user.token forKey:@"token"];
-        [headers setObject:@"ios" forKey:@"platform"];
-        [headers setObject:AWDataHelper.shared.user.app forKey:@"app"];
-        [headers setObject:userId forKey:@"user-id"];
-        [headers setObject:AWDataHelper.shared.user.token_type forKey:@"token-type"];
-    }
-    NSURLSessionDataTask *dataTask = [[AFHTTPSessionManager manager] POST:[self getUrl:URLString] parameters:dict headers:headers progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [self handleResponse:responseObject successWithCode:success failure:failure];
-        
+           
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failure) {
             failure(error.description);
@@ -111,35 +72,13 @@ const static NSString *baseURL = @"https://api.sograce.ltd:8443";
     }
 }
 
-- (void) handleResponse:(NSDictionary *)responseObject successWithCode:(nullable void (^)(id _Nullable responseObject, NSInteger code))success failure:(nullable void (^)(NSString *error))failure {
-    if ([responseObject isKindOfClass:[NSDictionary class]]) {
-        NSInteger code = [[responseObject objectForKey:@"code"] intValue];
-        NSString *message = [responseObject objectForKey:@"message"];
-        NSDictionary* data = [responseObject objectForKey:@"data"];
-        if (success) {
-            success(data, code);
-        } else {
-            if (failure) {
-                failure(message);
-            }
-        }
-    }
-}
-
 - (void) handleResponse:(NSDictionary *)responseObject success:(nullable void (^)(id _Nullable responseObject))success failure:(nullable void (^)(NSString *error))failure {
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
-        NSInteger code = [[responseObject objectForKey:@"code"] intValue];
+        NSInteger code = [[responseObject objectForKey:@"State"] intValue];
         NSString *message = [responseObject objectForKey:@"message"];
-        NSDictionary* data = [responseObject objectForKey:@"data"];
-        if (code == 100) {
+        if (code == 0) {
             if (success) {
-                success(data);
-            }
-        } else if (code == kTokenError) {
-//            [[NSNotificationCenter defaultCenter] postNotificationName:HCNotificationLoginStatusChanged object:nil];
-            
-            if (failure) {
-                failure(nil);
+                success(responseObject);
             }
         } else {
             if (failure) {

@@ -7,6 +7,10 @@
 
 #import "AWUserModel.h"
 
+@implementation AWItemModel
+
+@end
+
 @implementation AWUserModel
 
 + (NSDictionary *)modelCustomPropertyMapper {
@@ -16,3 +20,5 @@
 }
 
 @end
+
+

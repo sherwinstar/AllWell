@@ -7,6 +7,9 @@
 
 #import "AWLoginViewController.h"
 #import "UIColor+RGBA.h"
+#import "AWNetwork.h"
+#import "AWUserModel.h"
+#import "AWDataHelper.h"
 
 @interface AWLoginViewController ()
 @property (nonatomic, weak)IBOutlet UIView *loginView;
@@ -40,14 +43,18 @@
     }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)loginAction:(id)sender {
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    [dict setObject:@"allwellapp" forKey:@"Name"];
+    [dict setObject:@"123456" forKey:@"Pass"];
+    [dict setObject:@"212" forKey:@"AppId"];
+    [[AWNetwork sharedInstance] POST:@"/User/Login" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
+        [AWDataHelper shared].user = [AWUserModel yy_modelWithDictionary:responseObject];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+    } failure:^(NSString * _Nonnull error) {
+        
+    }];
 }
-*/
 
 @end

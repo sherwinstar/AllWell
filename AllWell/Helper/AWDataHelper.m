@@ -25,7 +25,7 @@
 }
 
 - (BOOL)hasLogined {
-    if (self.user && self.user.token.length) {
+    if (self.user && self.user.AccessToken.length) {
         return YES;
     } else {
         return NO;

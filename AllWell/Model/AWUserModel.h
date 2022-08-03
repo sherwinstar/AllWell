@@ -10,15 +10,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+@interface AWItemModel : NSObject
+
+@property (nonatomic, copy) NSString *UserId;
+@property (nonatomic, copy) NSString *Username;
+
+@end
+
 @interface AWUserModel : NSObject
 
-@property (nonatomic, copy) NSString *token;
-@property (nonatomic, assign) NSUInteger user_id;
-@property (nonatomic, copy) NSString *app;
-@property (nonatomic, copy) NSString *platform;
-@property (nonatomic, copy) NSString *token_type;
-@property (nonatomic, assign) BOOL is_auth_compute;
-@property (nonatomic, assign) BOOL is_bind;
+@property (nonatomic, copy) NSString *AccessToken;
+@property (nonatomic, strong) AWItemModel *Item;
 
 @end
 

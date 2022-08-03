@@ -17,12 +17,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if ([AWDataHelper shared].user == nil) {
+    if (![[AWDataHelper shared] hasLogined]) {
         AWLoginViewController *loginController = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
         loginController.modalPresentationStyle = UIModalPresentationFullScreen;
         [self.navigationController presentViewController:loginController animated:NO completion:nil];
     }
-    // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -50,10 +50,61 @@
     [dict setObject:@"212" forKey:@"AppId"];
     [[AWNetwork sharedInstance] POST:@"/User/Login" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
         [AWDataHelper shared].user = [AWUserModel yy_modelWithDictionary:responseObject];
+        [self getDeviceList];
+        [self getUserInfo];
         [self dismissViewControllerAnimated:YES completion:nil];
         
     } failure:^(NSString * _Nonnull error) {
         
+    }];
+}
+
+- (void)getDeviceList {
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    [dict setObject:[AWDataHelper shared].user.Item.UserId forKey:@"UserId"];
+//    [dict setObject:@"123456" forKey:@"Pass"];
+    [dict setObject:@"212" forKey:@"AppId"];
+    [dict setObject:@"allwellapp" forKey:@"LoginName"];
+    [dict setObject:@"10" forKey:@"GroupId"];
+    [[AWNetwork sharedInstance] POST:@"Device/PersonDeviceList" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
+        int a = 0;
+        a++;
+        
+    } failure:^(NSString * _Nonnull error) {
+        NSLog(error);
+    }];
+}
+
+- (void)getUserInfo {
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    [dict setObject:[AWDataHelper shared].user.Item.UserId forKey:@"UserId"];
+    [dict setObject:@"212" forKey:@"AppId"];
+    [[AWNetwork sharedInstance] POST:@"User/UserInfo" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
+        int a = 0;
+        a++;
+        
+    } failure:^(NSString * _Nonnull error) {
+        NSLog(error);
+    }];
+}
+
+- (IBAction)registerUser:(id)sender {
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    [dict setObject:@"212" forKey:@"AppId"];
+    [dict setObject:@"shuishou" forKey:@"MobilePhone"];
+//    "MobilePhone": "string", (any phonenumber)
+//      "ThirdId": "string",
+//      "Language": "string",
+//      "TimeOffset": 0,
+//      "AppId": "string" (212 is given by sograce to us)
+
+    
+    [[AWNetwork sharedInstance] POST:@"User/CustomRegister" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
+        [AWDataHelper shared].user = [AWUserModel yy_modelWithDictionary:responseObject];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+    } failure:^(NSString * _Nonnull error) {
+        NSLog(error);
     }];
 }
 

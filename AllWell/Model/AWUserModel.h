@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *UserId;
 @property (nonatomic, copy) NSString *Username;
+@property (nonatomic, assign) NSUInteger DeviceCount;
 
 @end
 

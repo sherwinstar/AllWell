@@ -44,14 +44,14 @@ const static NSString *baseURL = @"https://api.sograce.ltd:8443/api";
 }
 
 - (nullable NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(nullable id)parameters success:(nullable void (^)(id _Nullable responseObject))success failure:(nullable void (^)(NSString *error))failure {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:parameters];
     NSMutableDictionary *headers = [NSMutableDictionary dictionary];
     if (AWDataHelper.shared.user && AWDataHelper.shared.user.AccessToken.length) {
-        [headers setObject:AWDataHelper.shared.user.AccessToken forKey:@"AccessToken"];
+        [headers setObject:AWDataHelper.shared.user.AccessToken forKey:@"Token"];
+        [headers setObject:@"212" forKey:@"AppId"];
     }
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    NSURLSessionDataTask *dataTask = [manager POST:[self getUrl:URLString] parameters:dict headers:headers progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager POST:[self getUrl:URLString] parameters:parameters headers:headers progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [self handleResponse:responseObject success:success failure:failure];
            
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -75,7 +75,7 @@ const static NSString *baseURL = @"https://api.sograce.ltd:8443/api";
 - (void) handleResponse:(NSDictionary *)responseObject success:(nullable void (^)(id _Nullable responseObject))success failure:(nullable void (^)(NSString *error))failure {
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
         NSInteger code = [[responseObject objectForKey:@"State"] intValue];
-        NSString *message = [responseObject objectForKey:@"message"];
+        NSString *message = [responseObject objectForKey:@"Message"];
         if (code == 0) {
             if (success) {
                 success(responseObject);

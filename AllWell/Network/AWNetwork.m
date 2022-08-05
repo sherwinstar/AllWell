@@ -45,13 +45,15 @@ const static NSString *baseURL = @"https://api.sograce.ltd:8443/api";
 
 - (nullable NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(nullable id)parameters success:(nullable void (^)(id _Nullable responseObject))success failure:(nullable void (^)(NSString *error))failure {
     NSMutableDictionary *headers = [NSMutableDictionary dictionary];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:parameters];
     if (AWDataHelper.shared.user && AWDataHelper.shared.user.AccessToken.length) {
         [headers setObject:AWDataHelper.shared.user.AccessToken forKey:@"Token"];
+        [params setObject:AWDataHelper.shared.user.AccessToken forKey:@"Token"];
         [headers setObject:@"212" forKey:@"AppId"];
     }
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    NSURLSessionDataTask *dataTask = [manager POST:[self getUrl:URLString] parameters:parameters headers:headers progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [manager POST:[self getUrl:URLString] parameters:params headers:headers progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [self handleResponse:responseObject success:success failure:failure];
            
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(nullable id)parameters success:(nullable void (^)(id _Nullable responseObject))success failure:(nullable void (^)(NSString *error))failure;
 
-- (nullable NSURLSessionDataTask *)POST:(NSString *)URLString parameters:(nullable id)parameters successWithCode:(nullable void (^)(id _Nullable responseObject, NSInteger code))success failure:(nullable void (^)(NSString *error))failure;
 @end
 
 NS_ASSUME_NONNULL_END

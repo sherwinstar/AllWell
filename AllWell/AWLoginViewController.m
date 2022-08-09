@@ -130,11 +130,6 @@
     NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict setObject:@"212" forKey:@"AppId"];
     [dict setObject:@"shuishou" forKey:@"MobilePhone"];
-//    "MobilePhone": "string", (any phonenumber)
-//      "ThirdId": "string",
-//      "Language": "string",
-//      "TimeOffset": 0,
-//      "AppId": "string" (212 is given by sograce to us)
 
     
     [[AWNetwork sharedInstance] POST:@"User/CustomRegister" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
@@ -177,6 +172,27 @@
     [dict setObject:@"zh-cn" forKey:@"Language"];
     [dict setObject:@8 forKey:@"TimeOffset"];
     [[AWNetwork sharedInstance] POST:@"Device/CheckDevice" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
+        int a = 0;
+        a++;
+        NSString *phone = [AWDataHelper shared].user.Item.Username;
+        [self addDevice:serialNumber deviceId:146 relation:@"父子" deviceType:2 phone:phone];
+        
+    } failure:^(NSString * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+- (void)addDevice:(NSString *)serialNumber deviceId:(NSInteger)deviceId relation:(NSString *)relation deviceType:(NSUInteger)type phone:(NSString *)phone{
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    [dict setObject:@(deviceId) forKey:@"DeviceId"];
+    [dict setObject:@(type) forKey:@"DeviceType"];
+    [dict setObject:relation forKey:@"RelationName"];
+    [dict setObject:phone forKey:@"RelationPhone"];
+    [dict setObject:@"212" forKey:@"AppId"];
+    [dict setObject:[AWDataHelper shared].user.Item.UserId forKey:@"UserId"];
+    [dict setObject:@"zh-cn" forKey:@"Language"];
+    [dict setObject:@8 forKey:@"TimeOffset"];
+    [[AWNetwork sharedInstance] POST:@"Device/AddDeviceAndUserGroup" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
         int a = 0;
         a++;
         

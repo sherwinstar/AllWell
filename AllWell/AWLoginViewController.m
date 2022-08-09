@@ -73,18 +73,47 @@
 //    [dict setObject:@"allwellapp" forKey:@"LoginName"];
 //    [dict setObject:@"10" forKey:@"GroupId"];
     [[AWNetwork sharedInstance] POST:@"Device/PersonDeviceList" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
-        AWDeviceListModel * model = [AWDeviceListModel yy_modelWithDictionary:responseObject];
-        if (model.Items.count) {
-            [AWDataHelper shared].device = model.Items.firstObject;
+
+        NSInteger code = [[responseObject objectForKey:@"State"] intValue];
+        if (code == 100) {
+            [self checkDevice:@"865513041163079"];
+        } else {
+            AWDeviceListModel * model = [AWDeviceListModel yy_modelWithDictionary:responseObject];
+            if (model.Items.count) {
+                [AWDataHelper shared].device = model.Items.firstObject;
+            }
+            [self getDailyHealthData];
         }
-        [self getDailyHealthData];
+        
         
     } failure:^(NSString * _Nonnull error) {
-        NSLog(error);
     }];
 }
 
 - (void)getUserInfo {
+//    {
+//        State = 0;
+//        ThirdParty =     {
+//            ThirdType = 0;
+//            UserID = 0;
+//        };
+//        UserInfo =     {
+//            Address = "";
+//            Avatar = "";
+//            Calorie = 0;
+//            Distance = 0;
+//            Email = "nick@miwitrack.com";
+//            Gender = 0;
+//            Height = 0;
+//            LoginName = "nick@miwitrack.com";
+//            SportTime = 0;
+//            Steps = 0;
+//            UserAge = 0;
+//            UserId = 1548;
+//            Username = "nick@miwitrack.com";
+//            Weight = 0;
+//        };
+//    }
     NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict setObject:[AWDataHelper shared].user.Item.UserId forKey:@"UserId"];
     [dict setObject:@"212" forKey:@"AppId"];
@@ -93,7 +122,7 @@
         a++;
         
     } failure:^(NSString * _Nonnull error) {
-        NSLog(error);
+        NSLog(@"%@", error);
     }];
 }
 
@@ -113,7 +142,7 @@
         [self dismissViewControllerAnimated:YES completion:nil];
         
     } failure:^(NSString * _Nonnull error) {
-        NSLog(error);
+        NSLog(@"%@", error);
     }];
 }
 
@@ -133,11 +162,27 @@
     [[AWNetwork sharedInstance] POST:@"Health/GetStepsForDay" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
         int a = 0;
         a++;
+        [self checkDevice:@"865513041163079"];
         
     } failure:^(NSString * _Nonnull error) {
-        NSLog(error);
+        NSLog(@"%@", error);
     }];
-    
+}
+
+- (void)checkDevice:(NSString *)serialNumber {
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    [dict setObject:serialNumber forKey:@"SerialNumber"];
+    [dict setObject:@"212" forKey:@"AppId"];
+    [dict setObject:[AWDataHelper shared].user.Item.UserId forKey:@"UserId"];
+    [dict setObject:@"zh-cn" forKey:@"Language"];
+    [dict setObject:@8 forKey:@"TimeOffset"];
+    [[AWNetwork sharedInstance] POST:@"Device/CheckDevice" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
+        int a = 0;
+        a++;
+        
+    } failure:^(NSString * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 @end

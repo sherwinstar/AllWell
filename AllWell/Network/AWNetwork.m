@@ -78,14 +78,8 @@ const static NSString *baseURL = @"https://api.sograce.ltd:8443/api";
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
         NSInteger code = [[responseObject objectForKey:@"State"] intValue];
         NSString *message = [responseObject objectForKey:@"Message"];
-        if (code == 0) {
-            if (success) {
-                success(responseObject);
-            }
-        } else {
-            if (failure) {
-                failure(message);
-            }
+        if (success) {
+            success(responseObject);
         }
     }
 }

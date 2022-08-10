@@ -13,6 +13,11 @@
 
 @implementation AWAddDeviceViewController
 
++ (instancetype)viewController {
+    AWAddDeviceViewController *devicesController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"addDevice"];
+    return devicesController;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

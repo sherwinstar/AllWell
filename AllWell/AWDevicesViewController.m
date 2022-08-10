@@ -13,6 +13,11 @@
 
 @implementation AWDevicesViewController
 
++ (instancetype)viewController {
+    AWDevicesViewController *devicesController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"deviceList"];
+    return devicesController;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Add Device" style:UIBarButtonItemStyleDone target:self action:@selector(addDevice:)];
@@ -20,7 +25,8 @@
 }
 
 - (void)addDevice:(id)sender {
-    
+    UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"addDevice"];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 /*

@@ -18,10 +18,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     if (![[AWDataHelper shared] hasLogined]) {
-        AWLoginViewController *loginController = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
+        UIViewController *loginController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginNav"];
         loginController.modalPresentationStyle = UIModalPresentationFullScreen;
         [self.navigationController presentViewController:loginController animated:NO completion:nil];
     }
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"My watches" style:UIBarButtonItemStyleDone target:self action:@selector(viewWatches:)];
+}
+
+- (void)viewWatches:(id)sender {
+    UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"deviceList"];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

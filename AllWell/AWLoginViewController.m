@@ -14,8 +14,8 @@
 
 @interface AWLoginViewController ()
 @property (nonatomic, weak)IBOutlet UIView *loginView;
-@property (nonatomic, weak)IBOutlet UIView *registerView;
-@property (nonatomic, weak)IBOutlet UIButton *switchButton;
+@property (nonatomic, weak)IBOutlet UIButton *registerButton;
+@property (nonatomic, weak)IBOutlet UIButton *loginButton;
 @end
 
 @implementation AWLoginViewController
@@ -23,26 +23,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRGB:0xF6F6F6];
+    [self.loginButton setBackgroundColor:[UIColor colorWithRGB:0x3385FF]];
     self.loginView.layer.cornerRadius = 6.0;
-    self.registerView.layer.cornerRadius = 6.0;
-    self.switchButton.layer.cornerRadius = 6.0;
-    self.registerView.hidden = YES;
-    [self.switchButton setTitle:@"Register" forState:UIControlStateNormal];
-    [self.switchButton setTitle:@"Login" forState:UIControlStateSelected];
-    [self.switchButton setBackgroundColor:[UIColor colorWithRGB:0xFFFFFF]];
+    self.loginButton.layer.cornerRadius = 20;
+    [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     // Do any additional setup after loading the view.
 }
 
-- (IBAction)switchAction:(UIButton *)sender {
-    sender.selected = !sender.selected;
-    if (sender.selected) {
-        self.registerView.hidden = NO;
-        self.loginView.hidden = YES;
-    } else {
-        self.registerView.hidden = YES;
-        self.loginView.hidden = NO;
-    }
-}
 
 - (IBAction)loginAction:(id)sender {
     NSMutableDictionary *dict = [NSMutableDictionary new];
@@ -58,6 +45,11 @@
     } failure:^(NSString * _Nonnull error) {
         
     }];
+}
+
+- (IBAction)registerAction:(id)sender {
+    UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"register"];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)getDeviceList {
@@ -126,20 +118,20 @@
     }];
 }
 
-- (IBAction)registerUser:(id)sender {
-    NSMutableDictionary *dict = [NSMutableDictionary new];
-    [dict setObject:@"212" forKey:@"AppId"];
-    [dict setObject:@"shuishou" forKey:@"MobilePhone"];
-
-    
-    [[AWNetwork sharedInstance] POST:@"User/CustomRegister" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
-        [AWDataHelper shared].user = [AWUserModel yy_modelWithDictionary:responseObject];
-        [self dismissViewControllerAnimated:YES completion:nil];
-        
-    } failure:^(NSString * _Nonnull error) {
-        NSLog(@"%@", error);
-    }];
-}
+//- (IBAction)registerUser:(id)sender {
+//    NSMutableDictionary *dict = [NSMutableDictionary new];
+//    [dict setObject:@"212" forKey:@"AppId"];
+//    [dict setObject:@"shuishou" forKey:@"MobilePhone"];
+//
+//    
+//    [[AWNetwork sharedInstance] POST:@"User/CustomRegister" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
+//        [AWDataHelper shared].user = [AWUserModel yy_modelWithDictionary:responseObject];
+//        [self dismissViewControllerAnimated:YES completion:nil];
+//        
+//    } failure:^(NSString * _Nonnull error) {
+//        NSLog(@"%@", error);
+//    }];
+//}
 
 - (void)getDailyHealthData {
     if ([AWDataHelper shared].device == nil) {

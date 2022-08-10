@@ -13,7 +13,12 @@
 #import "AWDeviceModel.h"
 
 @interface AWRegisterViewController ()
-
+@property (nonatomic, weak)IBOutlet UIView *registerView;
+@property (nonatomic, weak)IBOutlet UIButton *registerButton;
+@property (nonatomic, weak)IBOutlet UITextField *nameField;
+@property (nonatomic, weak)IBOutlet UITextField *pwdField;
+@property (nonatomic, weak)IBOutlet UITextField *emailField;
+@property (nonatomic, weak)IBOutlet UITextField *codeField;
 @end
 
 @implementation AWRegisterViewController
@@ -21,29 +26,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Create Account";
+    self.view.backgroundColor = [UIColor colorWithRGB:0xF6F6F6];
+    [self.registerButton setBackgroundColor:[UIColor colorWithRGB:0x3385FF]];
+    self.registerView.layer.cornerRadius = 6.0;
+    self.registerButton.layer.cornerRadius = 20;
+    [self.registerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     // Do any additional setup after loading the view.
     
 }
 
 - (IBAction)registerAction:(id)sender {
-    NSString *Username;
-    NSString *Email;
-    NSString *Password;
-    NSString *SmsCode;
-    NSString *Language;
+    NSString *username = [self.nameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *email = [self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *password = [self.pwdField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *smsCode = [self.codeField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if (username.length == 0 || email.length == 0 || password.length == 0 || smsCode.length == 0) {
+        return;
+    }
     NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict setObject:@"212" forKey:@"AppId"];
-    [dict setObject:Username forKey:@"Username"];
-    [dict setObject:Email forKey:@"Email"];
-    [dict setObject:Password forKey:@"Password"];
-    [dict setObject:Email forKey:@"LoginName"];
-    [dict setObject:Language forKey:@"Language"];
-    [dict setObject:SmsCode forKey:@"SmsCode"];
+    [dict setObject:username forKey:@"Username"];
+    [dict setObject:email forKey:@"Email"];
+    [dict setObject:password forKey:@"Password"];
+    [dict setObject:email forKey:@"LoginName"];
+    [dict setObject:@"en" forKey:@"Language"];
+    [dict setObject:smsCode forKey:@"SmsCode"];
     [dict setObject:@(0) forKey:@"TimeOffset"];
     
     [[AWNetwork sharedInstance] POST:@"User/RegisterEmail" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
-        [AWDataHelper shared].user = [AWUserModel yy_modelWithDictionary:responseObject];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        NSInteger code = [[responseObject objectForKey:@"State"] integerValue];
+        if (code == 0) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
         
     } failure:^(NSString * _Nonnull error) {
         NSLog(@"%@", error);
@@ -51,7 +65,10 @@
 }
 
 - (IBAction)sendCodeAction:(id)sender {
-    NSString *email;
+    NSString *email = [self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if (email.length == 0) {
+        return;
+    }
     NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict setObject:@"212" forKey:@"AppId"];
     [dict setObject:email forKey:@"Username"];
@@ -62,15 +79,14 @@
     [dict setObject:@(0) forKey:@"TimeOffset"];
     
     [[AWNetwork sharedInstance] POST:@"User/SendCodeForEmail" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
-        [AWDataHelper shared].user = [AWUserModel yy_modelWithDictionary:responseObject];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        NSInteger code = [[responseObject objectForKey:@"State"] integerValue];
+        if (code == 0) {
+            
+        }
     } failure:^(NSString * _Nonnull error) {
         NSLog(@"%@", error);
     }];
 }
-
-
-
 
 /*
 #pragma mark - Navigation

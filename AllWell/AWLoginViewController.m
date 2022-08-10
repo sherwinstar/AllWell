@@ -16,6 +16,8 @@
 @property (nonatomic, weak)IBOutlet UIView *loginView;
 @property (nonatomic, weak)IBOutlet UIButton *registerButton;
 @property (nonatomic, weak)IBOutlet UIButton *loginButton;
+@property (nonatomic, weak)IBOutlet UITextField *nameField;
+@property (nonatomic, weak)IBOutlet UITextField *pwdField;
 @end
 
 @implementation AWLoginViewController
@@ -32,9 +34,14 @@
 
 
 - (IBAction)loginAction:(id)sender {
+    NSString *username = [self.nameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *password = [self.pwdField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if (username.length == 0 || password.length == 0) {
+        return;
+    }
     NSMutableDictionary *dict = [NSMutableDictionary new];
-    [dict setObject:@"nick@miwitrack.com" forKey:@"Name"];
-    [dict setObject:@"123456" forKey:@"Pass"];
+    [dict setObject:username forKey:@"Name"];
+    [dict setObject:password forKey:@"Pass"];
     [dict setObject:@"212" forKey:@"AppId"];
     [[AWNetwork sharedInstance] POST:@"/User/Login" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
         [AWDataHelper shared].user = [AWUserModel yy_modelWithDictionary:responseObject];
@@ -43,7 +50,7 @@
         [self dismissViewControllerAnimated:YES completion:nil];
         
     } failure:^(NSString * _Nonnull error) {
-        
+        NSLog(@"%@", error);
     }];
 }
 

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong, nullable) AWUserModel *user;
 @property(nonatomic, strong, nullable) AWDeviceModel *device;
-
+@property(nonatomic, assign) BOOL shouldAddDevice;
 + (instancetype)shared;
 - (BOOL)hasLogined;
 - (void)logout;

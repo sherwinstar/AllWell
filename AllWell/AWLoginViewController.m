@@ -45,8 +45,9 @@
     [dict setObject:@"212" forKey:@"AppId"];
     [[AWNetwork sharedInstance] POST:@"/User/Login" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
         [AWDataHelper shared].user = [AWUserModel yy_modelWithDictionary:responseObject];
-        [self getDeviceList];
-        [self getUserInfo];
+        [AWDataHelper shared].shouldAddDevice = [AWDataHelper shared].user.Item.DeviceCount == 0;
+//        [self getDeviceList];
+//        [self getUserInfo];
         [self dismissViewControllerAnimated:YES completion:nil];
         
     } failure:^(NSString * _Nonnull error) {

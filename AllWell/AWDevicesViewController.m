@@ -6,6 +6,11 @@
 //
 
 #import "AWDevicesViewController.h"
+#import "UIColor+RGBA.h"
+#import "AWNetwork.h"
+#import "AWUserModel.h"
+#import "AWDataHelper.h"
+#import "AWDeviceModel.h"
 
 @interface AWDevicesViewController ()
 @property (nonatomic, weak)IBOutlet UITableView *devicesTableView;
@@ -27,6 +32,36 @@
 - (void)addDevice:(id)sender {
     UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"addDevice"];
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)getDeviceList {
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    [dict setObject:[AWDataHelper shared].user.Item.UserId forKey:@"UserId"];
+//    [dict setObject:@"123456" forKey:@"Pass"];
+    [dict setObject:@"212" forKey:@"AppId"];
+    [dict setObject:@"Google" forKey:@"MapType"];
+    [dict setObject:@1 forKey:@"GroupId"];
+    [dict setObject:@"zh-cn" forKey:@"Language"];
+    [dict setObject:@8 forKey:@"TimeOffset"];
+
+//    [dict setObject:@"allwellapp" forKey:@"LoginName"];
+//    [dict setObject:@"10" forKey:@"GroupId"];
+    [[AWNetwork sharedInstance] POST:@"Device/PersonDeviceList" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
+
+        NSInteger code = [[responseObject objectForKey:@"State"] intValue];
+        if (code == 100) {
+//            [self checkDevice:@"865513041163079"];
+        } else {
+            AWDeviceListModel * model = [AWDeviceListModel yy_modelWithDictionary:responseObject];
+            if (model.Items.count) {
+                [AWDataHelper shared].device = model.Items.firstObject;
+            }
+            [self.devicesTableView reloadData];
+        }
+        
+        
+    } failure:^(NSString * _Nonnull error) {
+    }];
 }
 
 /*

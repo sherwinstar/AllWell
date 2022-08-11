@@ -28,6 +28,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Add device";
+    self.view.backgroundColor = [UIColor colorWithRGB:0xF6F6F6];
+    [self.bindButton setBackgroundColor:[UIColor colorWithRGB:0x3385FF]];
+    self.addView.layer.cornerRadius = 6.0;
+    self.bindButton.layer.cornerRadius = 20;
+    [self.bindButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     // Do any additional setup after loading the view.
 }
 
@@ -48,9 +54,13 @@
     [dict setObject:@"en" forKey:@"Language"];
     [dict setObject:@0 forKey:@"TimeOffset"];
     [[AWNetwork sharedInstance] POST:@"Device/CheckDevice" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
-        NSString *phone = [AWDataHelper shared].user.Item.Username;
-        [self addDevice:serialNumber deviceId:146 relation:name deviceType:2 phone:phone];
-        
+        NSInteger code = [[responseObject objectForKey:@"State"] intValue];
+        if (code == 0) {
+            NSString *phone = [AWDataHelper shared].user.Item.Username;
+            NSInteger deviceId = [[responseObject objectForKey:@"DeviceId"] integerValue];
+            NSInteger deviceType = [[responseObject objectForKey:@"DeviceType"] integerValue];
+            [self addDevice:serialNumber deviceId:deviceId relation:name deviceType:deviceType phone:phone];
+        }
     } failure:^(NSString * _Nonnull error) {
         NSLog(@"%@", error);
     }];
@@ -67,10 +77,10 @@
     [dict setObject:@"en" forKey:@"Language"];
     [dict setObject:@0 forKey:@"TimeOffset"];
     [[AWNetwork sharedInstance] POST:@"Device/AddDeviceAndUserGroup" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
-        int a = 0;
-        a++;
-        [self.navigationController popViewControllerAnimated:YES];
-        
+        NSInteger code = [[responseObject objectForKey:@"State"] intValue];
+        if (code == 0) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     } failure:^(NSString * _Nonnull error) {
         NSLog(@"%@", error);
     }];

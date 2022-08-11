@@ -11,7 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AWDeviceModel : NSObject
+@property (nonatomic, assign) NSUInteger DeviceType;
+@property (nonatomic, copy) NSString *Type;
+@property (nonatomic, assign) NSUInteger TypeValue;
 @property (nonatomic, copy) NSString *Id;
+@property (nonatomic, assign) NSUInteger UserGroupId;
 @property (nonatomic, assign) CGFloat Latitude;
 @property (nonatomic, assign) CGFloat Longitude;
 @property (nonatomic, assign) CGFloat Speed;
@@ -25,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface AWDeviceListModel : NSObject
-@property (nonatomic, copy) NSArray *Items;
+@property (nonatomic, strong) NSMutableArray *Items;
 @property (nonatomic, assign) NSUInteger ExceptionCount;
 @property (nonatomic, assign) NSUInteger MessageCount;
 

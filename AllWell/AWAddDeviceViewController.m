@@ -13,7 +13,10 @@
 #import "AWDeviceModel.h"
 
 @interface AWAddDeviceViewController ()
-
+@property (nonatomic, weak)IBOutlet UIView *addView;
+@property (nonatomic, weak)IBOutlet UIButton *bindButton;
+@property (nonatomic, weak)IBOutlet UITextField *nameField;
+@property (nonatomic, weak)IBOutlet UITextField *imeiField;
 @end
 
 @implementation AWAddDeviceViewController
@@ -28,17 +31,16 @@
     // Do any additional setup after loading the view.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)bindAction:(id)sender {
+    NSString *name = [self.nameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *imei = [self.imeiField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if (name.length == 0 || imei.length == 0) {
+        return;
+    }
+    [self checkDevice:imei name:name];
 }
-*/
 
-- (void)checkDevice:(NSString *)serialNumber {
+- (void)checkDevice:(NSString *)serialNumber name:(NSString *)name {
     NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict setObject:serialNumber forKey:@"SerialNumber"];
     [dict setObject:@"212" forKey:@"AppId"];
@@ -47,7 +49,7 @@
     [dict setObject:@0 forKey:@"TimeOffset"];
     [[AWNetwork sharedInstance] POST:@"Device/CheckDevice" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
         NSString *phone = [AWDataHelper shared].user.Item.Username;
-        [self addDevice:serialNumber deviceId:146 relation:@"父子" deviceType:2 phone:phone];
+        [self addDevice:serialNumber deviceId:146 relation:name deviceType:2 phone:phone];
         
     } failure:^(NSString * _Nonnull error) {
         NSLog(@"%@", error);

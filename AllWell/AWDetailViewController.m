@@ -6,6 +6,11 @@
 //
 
 #import "AWDetailViewController.h"
+#import "UIColor+RGBA.h"
+#import "AWNetwork.h"
+#import "AWUserModel.h"
+#import "AWDataHelper.h"
+#import "AWDeviceModel.h"
 
 @interface AWDetailViewController ()
 

@@ -93,7 +93,6 @@
     AWDeviceModel *model = [self.listModel.Items objectAtIndex:indexPath.row];
     nameLabel.text = model.Name;
     imeiLabel.text = model.SerialNumber;
-//    [cell updateData:self.dataArray[indexPath.row]];
     return cell;
 }
 

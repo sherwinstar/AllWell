@@ -9,7 +9,7 @@ target 'AllWell' do
   pod 'SDWebImage', '5.0.0'
   pod 'Masonry', '1.0.2'
   pod 'YYModel', '1.0.4'
-
+  pod 'Toast', '~> 3.0'
   # Pods for AllWell
 
 end

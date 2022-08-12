@@ -15,6 +15,7 @@
 #import "AWDeviceModel.h"
 #import "AWStepsForDayModel.h"
 #import "AWExceptionMessageListModel.h"
+#import <Toast/UIView+Toast.h>
 
 @interface AWMainViewController ()
 @property(nonatomic, strong)NSDateFormatter *dateFormatter;
@@ -124,8 +125,8 @@
     [dict setObject:@"212" forKey:@"AppId"];
     [dict setObject:@"Google" forKey:@"MapType"];
     [dict setObject:@1 forKey:@"GroupId"];
-    [dict setObject:@"zh-cn" forKey:@"Language"];
-    [dict setObject:@8 forKey:@"TimeOffset"];
+    [dict setObject:@"en" forKey:@"Language"];
+    [dict setObject:@0 forKey:@"TimeOffset"];
 
 //    [dict setObject:@"allwellapp" forKey:@"LoginName"];
 //    [dict setObject:@"10" forKey:@"GroupId"];
@@ -207,13 +208,17 @@
         if (code == 0) {
             AWExceptionMessageListModel *model = [AWExceptionMessageListModel yy_modelWithDictionary:responseObject];
             for (AWExceptionMessageModel *ec in model.Items) {
-                if (ec.NotificationType == 139) {
+                if (ec.NotificationType == 110) {
                     self.fallDownModel = ec;
                     [self.infoTableView reloadData];
                     break;
                 }
             }
         }
+        if (!self.fallDownModel) {
+            [self.view makeToast:@"No fall down alert" duration:2.0 position:CSToastPositionCenter];
+        }
+        
         
     } failure:^(NSString * _Nonnull error) {
         NSLog(@"%@", error);
@@ -246,7 +251,7 @@
     [[AWNetwork sharedInstance] POST:@"Command/SendCommand" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
         NSInteger code = [[responseObject objectForKey:@"State"] intValue];
         if (code == 0) {
-            
+            [self.view makeToast:@"Successful to send cmd to take photo" duration:2.0 position:CSToastPositionCenter];
         }
         
     } failure:^(NSString * _Nonnull error) {

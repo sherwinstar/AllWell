@@ -24,6 +24,7 @@
 		4868B0742898277B001E400E /* UIColor+RGBA.m in Sources */ = {isa = PBXBuildFile; fileRef = 4868B0692898277B001E400E /* UIColor+RGBA.m */; };
 		4868B0752898277B001E400E /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4868B06A2898277B001E400E /* NSURL+Utils.m */; };
 		4868B0762898277B001E400E /* NSDictionary+AW.m in Sources */ = {isa = PBXBuildFile; fileRef = 4868B06B2898277B001E400E /* NSDictionary+AW.m */; };
+		488C5FAD28A5FFD200562B31 /* AWStepsForDayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 488C5FAC28A5FFD200562B31 /* AWStepsForDayModel.m */; };
 		48973F9428997CC300A3C162 /* AWNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 48973F9228997CC300A3C162 /* AWNetwork.m */; };
 		48973F9828997D6D00A3C162 /* AWDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 48973F9728997D6D00A3C162 /* AWDataHelper.m */; };
 		48973F9C28997E3200A3C162 /* AWUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48973F9A28997E3200A3C162 /* AWUserModel.m */; };
@@ -70,6 +71,8 @@
 		4868B06C2898277B001E400E /* UIImageView+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Loading.h"; sourceTree = "<group>"; };
 		4868B06D2898277B001E400E /* NSMutableDictionary+AW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+AW.h"; sourceTree = "<group>"; };
 		4868B07728982A16001E400E /* AWGeneralMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWGeneralMacro.h; sourceTree = "<group>"; };
+		488C5FAB28A5FFD200562B31 /* AWStepsForDayModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWStepsForDayModel.h; sourceTree = "<group>"; };
+		488C5FAC28A5FFD200562B31 /* AWStepsForDayModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWStepsForDayModel.m; sourceTree = "<group>"; };
 		48973F9228997CC300A3C162 /* AWNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWNetwork.m; sourceTree = "<group>"; };
 		48973F9328997CC300A3C162 /* AWNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWNetwork.h; sourceTree = "<group>"; };
 		48973F9628997D6D00A3C162 /* AWDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWDataHelper.h; sourceTree = "<group>"; };
@@ -203,6 +206,8 @@
 				48973F9B28997E3200A3C162 /* AWUserModel.h */,
 				48974257289D691800A3C162 /* AWDeviceModel.h */,
 				48974258289D691800A3C162 /* AWDeviceModel.m */,
+				488C5FAB28A5FFD200562B31 /* AWStepsForDayModel.h */,
+				488C5FAC28A5FFD200562B31 /* AWStepsForDayModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -358,6 +363,7 @@
 				4897425F28A2B94C00A3C162 /* AWAddDeviceViewController.m in Sources */,
 				48973F9828997D6D00A3C162 /* AWDataHelper.m in Sources */,
 				4897425C28A2B92B00A3C162 /* AWDevicesViewController.m in Sources */,
+				488C5FAD28A5FFD200562B31 /* AWStepsForDayModel.m in Sources */,
 				4868AD902897EC72001E400E /* SceneDelegate.m in Sources */,
 				4897426228A3681700A3C162 /* AWRegisterViewController.m in Sources */,
 			);

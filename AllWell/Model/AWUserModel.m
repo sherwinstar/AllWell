@@ -13,12 +13,6 @@
 
 @implementation AWUserModel
 
-+ (NSDictionary *)modelCustomPropertyMapper {
-    return @{@"token_type" :@"token-type",
-             @"user_id" : @"user-id"
-    };
-}
-
 @end
 
 

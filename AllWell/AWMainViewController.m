@@ -13,18 +13,20 @@
 #import "AWUserModel.h"
 #import "AWDataHelper.h"
 #import "AWDeviceModel.h"
+#import "AWStepsForDayModel.h"
 
 @interface AWMainViewController ()
-@property(nonatomic, assign)BOOL enteredAddDevice;
 @property(nonatomic, strong)NSDateFormatter *dateFormatter;
+@property(nonatomic, strong)AWDailyStepsModel *dailyStepsModel;
+@property (nonatomic, weak)IBOutlet UITableView *infoTableView;
 @end
 
 @implementation AWMainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Information";
     self.dateFormatter = [[NSDateFormatter alloc] init];
-    self.enteredAddDevice = NO;
     if (![[AWDataHelper shared] hasLogined]) {
         UIViewController *loginController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginNav"];
         loginController.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -36,12 +38,15 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if ([[AWDataHelper shared] hasLogined] && [AWDataHelper shared].user.Item.DeviceCount == 0 && [AWDataHelper shared].shouldAddDevice && ![AWDataHelper shared].device) {
+    if (![[AWDataHelper shared] hasLogined])
+        return;
+    if ([AWDataHelper shared].user.Item.DeviceCount == 0 && [AWDataHelper shared].shouldAddDevice && ![AWDataHelper shared].device) {
         [AWDataHelper shared].shouldAddDevice = NO;
         [self goAddDevice];
-    }
-    
-    if ([[AWDataHelper shared] hasLogined] && [AWDataHelper shared].device) {
+        return;
+    } else if ([AWDataHelper shared].user.Item.DeviceCount > 0 && ![AWDataHelper shared].device) {
+        [self getDeviceList];
+    } else if ([AWDataHelper shared].device) {
         [self getDailyHealthData];
     }
 }
@@ -54,6 +59,62 @@
 - (void)viewWatches:(id)sender {
     UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"deviceList"];
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.dailyStepsModel ? 1 : 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *kItemCellID = @"dailyHealthCell";
+    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:kItemCellID forIndexPath:indexPath];
+    UILabel *dateLabel = [cell viewWithTag:1];
+    UILabel *calloriLabel = [cell viewWithTag:2];
+    UILabel *distanceLabel = [cell viewWithTag:3];
+    UILabel *stepsLabel = [cell viewWithTag:4];
+    dateLabel.text = self.dailyStepsModel.Date;
+    calloriLabel.text = [NSString stringWithFormat:@"Cariello: %@", self.dailyStepsModel.Cariello];
+    distanceLabel.text = [NSString stringWithFormat:@"Distance: %@", self.dailyStepsModel.Distance];
+    stepsLabel.text = [NSString stringWithFormat:@"Steps: %lu", (unsigned long)self.dailyStepsModel.Steps];
+    return cell;
+}
+
+- (void)getDeviceList {
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    [dict setObject:[AWDataHelper shared].user.Item.UserId forKey:@"UserId"];
+//    [dict setObject:@"123456" forKey:@"Pass"];
+    [dict setObject:@"212" forKey:@"AppId"];
+    [dict setObject:@"Google" forKey:@"MapType"];
+    [dict setObject:@1 forKey:@"GroupId"];
+    [dict setObject:@"zh-cn" forKey:@"Language"];
+    [dict setObject:@8 forKey:@"TimeOffset"];
+
+//    [dict setObject:@"allwellapp" forKey:@"LoginName"];
+//    [dict setObject:@"10" forKey:@"GroupId"];
+    [[AWNetwork sharedInstance] POST:@"Device/PersonDeviceList" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
+
+        NSInteger code = [[responseObject objectForKey:@"State"] intValue];
+        if (code == 100) {
+            //无数据无表
+        } else {
+            AWDeviceListModel *listModel = [AWDeviceListModel yy_modelWithDictionary:responseObject];
+            if (listModel.Items.count && ![AWDataHelper shared].device) {
+                [AWDataHelper shared].device = listModel.Items.firstObject;
+                [self getDailyHealthData];
+            }
+        }
+        
+    } failure:^(NSString * _Nonnull error) {
+        
+    }];
 }
 
 
@@ -76,6 +137,14 @@
     [dict setObject:@"en" forKey:@"Language"];
     [dict setObject:@0 forKey:@"TimeOffset"];
     [[AWNetwork sharedInstance] POST:@"Health/GetStepsForDay" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
+        NSInteger code = [[responseObject objectForKey:@"State"] intValue];
+        if (code == 0) {
+            AWStepsForDayModel *model = [AWStepsForDayModel yy_modelWithDictionary:responseObject];
+            if (model.Items.count > 0) {
+                self.dailyStepsModel = model.Items.firstObject;
+                [self.infoTableView reloadData];
+            }
+        }
         
     } failure:^(NSString * _Nonnull error) {
         NSLog(@"%@", error);

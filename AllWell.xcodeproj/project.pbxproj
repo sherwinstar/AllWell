@@ -25,6 +25,7 @@
 		4868B0752898277B001E400E /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4868B06A2898277B001E400E /* NSURL+Utils.m */; };
 		4868B0762898277B001E400E /* NSDictionary+AW.m in Sources */ = {isa = PBXBuildFile; fileRef = 4868B06B2898277B001E400E /* NSDictionary+AW.m */; };
 		488C5FAD28A5FFD200562B31 /* AWStepsForDayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 488C5FAC28A5FFD200562B31 /* AWStepsForDayModel.m */; };
+		488C5FB028A6880C00562B31 /* AWExceptionMessageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 488C5FAF28A6880C00562B31 /* AWExceptionMessageListModel.m */; };
 		48973F9428997CC300A3C162 /* AWNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 48973F9228997CC300A3C162 /* AWNetwork.m */; };
 		48973F9828997D6D00A3C162 /* AWDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 48973F9728997D6D00A3C162 /* AWDataHelper.m */; };
 		48973F9C28997E3200A3C162 /* AWUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48973F9A28997E3200A3C162 /* AWUserModel.m */; };
@@ -73,6 +74,8 @@
 		4868B07728982A16001E400E /* AWGeneralMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWGeneralMacro.h; sourceTree = "<group>"; };
 		488C5FAB28A5FFD200562B31 /* AWStepsForDayModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWStepsForDayModel.h; sourceTree = "<group>"; };
 		488C5FAC28A5FFD200562B31 /* AWStepsForDayModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWStepsForDayModel.m; sourceTree = "<group>"; };
+		488C5FAE28A6880C00562B31 /* AWExceptionMessageListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWExceptionMessageListModel.h; sourceTree = "<group>"; };
+		488C5FAF28A6880C00562B31 /* AWExceptionMessageListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWExceptionMessageListModel.m; sourceTree = "<group>"; };
 		48973F9228997CC300A3C162 /* AWNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWNetwork.m; sourceTree = "<group>"; };
 		48973F9328997CC300A3C162 /* AWNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWNetwork.h; sourceTree = "<group>"; };
 		48973F9628997D6D00A3C162 /* AWDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWDataHelper.h; sourceTree = "<group>"; };
@@ -208,6 +211,8 @@
 				48974258289D691800A3C162 /* AWDeviceModel.m */,
 				488C5FAB28A5FFD200562B31 /* AWStepsForDayModel.h */,
 				488C5FAC28A5FFD200562B31 /* AWStepsForDayModel.m */,
+				488C5FAE28A6880C00562B31 /* AWExceptionMessageListModel.h */,
+				488C5FAF28A6880C00562B31 /* AWExceptionMessageListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -344,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4868B06F2898277B001E400E /* UIImageView+Loading.m in Sources */,
+				488C5FB028A6880C00562B31 /* AWExceptionMessageListModel.m in Sources */,
 				4868AD932897EC72001E400E /* AWMainViewController.m in Sources */,
 				48973F9F2899871800A3C162 /* AWLoginViewController.m in Sources */,
 				4868B0732898277B001E400E /* NSMutableArray+AW.m in Sources */,

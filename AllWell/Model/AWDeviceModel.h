@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AWDeviceModel : NSObject
 @property (nonatomic, assign) NSUInteger DeviceType;
 @property (nonatomic, copy) NSString *Type;
+@property (nonatomic, assign) NSUInteger Model;
 @property (nonatomic, assign) NSUInteger TypeValue;
 @property (nonatomic, copy) NSString *Id;
 @property (nonatomic, assign) NSUInteger UserGroupId;

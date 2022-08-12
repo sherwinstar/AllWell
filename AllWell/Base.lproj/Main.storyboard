@@ -20,6 +20,29 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pnE-5G-mok">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="Y1e-FH-pR6">
+                                    <rect key="frame" x="0.0" y="179" width="414" height="128"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJS-aa-jty">
+                                            <rect key="frame" x="107" y="44" width="200" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="200" id="F1S-Wc-3Cn"/>
+                                                <constraint firstAttribute="height" constant="40" id="axF-bq-XvQ"/>
+                                            </constraints>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="Take Photo"/>
+                                            <connections>
+                                                <action selector="sendTakePhotoCmd:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jwi-C9-n99"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="EJS-aa-jty" firstAttribute="centerY" secondItem="Y1e-FH-pR6" secondAttribute="centerY" id="GsP-ps-mkf"/>
+                                        <constraint firstItem="EJS-aa-jty" firstAttribute="centerX" secondItem="Y1e-FH-pR6" secondAttribute="centerX" id="iLp-z6-crg"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dailyHealthCell" rowHeight="112" id="Qc6-BW-xLs">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="112"/>
@@ -38,20 +61,18 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cbe-Ti-oaH">
-                                                    <rect key="frame" x="15" y="44" width="100" height="24"/>
+                                                    <rect key="frame" x="15" y="44" width="189.5" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="Eig-Mg-YFi"/>
-                                                        <constraint firstAttribute="width" constant="100" id="pWk-yM-4Vl"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAu-nY-O27">
-                                                    <rect key="frame" x="299" y="44" width="100" height="24"/>
+                                                    <rect key="frame" x="209.5" y="44" width="189.5" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="cKP-vl-i2D"/>
-                                                        <constraint firstAttribute="width" constant="100" id="yOV-6q-uGB"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -69,6 +90,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="h5Y-vp-X51" firstAttribute="leading" secondItem="UGh-75-YWc" secondAttribute="leading" constant="15" id="8vI-bG-iVV"/>
+                                                <constraint firstItem="bAu-nY-O27" firstAttribute="leading" secondItem="Cbe-Ti-oaH" secondAttribute="trailing" constant="5" id="9ja-ju-WAj"/>
                                                 <constraint firstAttribute="trailing" secondItem="h5Y-vp-X51" secondAttribute="trailing" constant="15" id="CVT-6w-Jxq"/>
                                                 <constraint firstItem="Cbe-Ti-oaH" firstAttribute="leading" secondItem="UGh-75-YWc" secondAttribute="leading" constant="15" id="FsN-Zb-pVt"/>
                                                 <constraint firstItem="Cbe-Ti-oaH" firstAttribute="top" secondItem="F05-nn-dwV" secondAttribute="bottom" constant="10" id="GkB-e4-gxD"/>
@@ -78,6 +100,7 @@
                                                 <constraint firstItem="F05-nn-dwV" firstAttribute="leading" secondItem="UGh-75-YWc" secondAttribute="leading" constant="15" id="WnJ-E0-3YJ"/>
                                                 <constraint firstAttribute="trailing" secondItem="bAu-nY-O27" secondAttribute="trailing" constant="15" id="XBn-42-IRH"/>
                                                 <constraint firstItem="bAu-nY-O27" firstAttribute="centerY" secondItem="UGh-75-YWc" secondAttribute="centerY" id="ZOd-Qd-f3r"/>
+                                                <constraint firstItem="bAu-nY-O27" firstAttribute="width" secondItem="Cbe-Ti-oaH" secondAttribute="width" id="eSf-6A-4Ne"/>
                                                 <constraint firstAttribute="trailing" secondItem="F05-nn-dwV" secondAttribute="trailing" constant="15" id="iYs-4K-Ica"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -101,6 +124,7 @@
                     <navigationItem key="navigationItem" id="bl5-DH-oOn"/>
                     <connections>
                         <outlet property="infoTableView" destination="pnE-5G-mok" id="BrD-rV-Smk"/>
+                        <outlet property="takePhotoButton" destination="EJS-aa-jty" id="uea-Q0-UVK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

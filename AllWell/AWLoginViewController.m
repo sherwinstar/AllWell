@@ -32,7 +32,6 @@
     // Do any additional setup after loading the view.
 }
 
-
 - (IBAction)loginAction:(id)sender {
     NSString *username = [self.nameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString *password = [self.pwdField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];

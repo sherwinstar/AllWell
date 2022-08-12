@@ -14,11 +14,15 @@
 #import "AWDataHelper.h"
 #import "AWDeviceModel.h"
 #import "AWStepsForDayModel.h"
+#import "AWExceptionMessageListModel.h"
 
 @interface AWMainViewController ()
 @property(nonatomic, strong)NSDateFormatter *dateFormatter;
 @property(nonatomic, strong)AWDailyStepsModel *dailyStepsModel;
+@property(nonatomic, strong)AWExceptionMessageModel *fallDownModel;
 @property (nonatomic, weak)IBOutlet UITableView *infoTableView;
+@property (nonatomic, weak)IBOutlet UIButton *takePhotoButton;
+
 @end
 
 @implementation AWMainViewController
@@ -26,6 +30,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Information";
+    [self.takePhotoButton setBackgroundColor:[UIColor colorWithRGB:0x3385FF]];
+    self.takePhotoButton.layer.cornerRadius = 20;
+    [self.takePhotoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.dateFormatter = [[NSDateFormatter alloc] init];
     if (![[AWDataHelper shared] hasLogined]) {
         UIViewController *loginController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginNav"];
@@ -48,6 +55,7 @@
         [self getDeviceList];
     } else if ([AWDataHelper shared].device) {
         [self getDailyHealthData];
+        [self getExceptionList];
     }
 }
 
@@ -62,7 +70,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dailyStepsModel ? 1 : 0;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -80,10 +88,32 @@
     UILabel *calloriLabel = [cell viewWithTag:2];
     UILabel *distanceLabel = [cell viewWithTag:3];
     UILabel *stepsLabel = [cell viewWithTag:4];
-    dateLabel.text = self.dailyStepsModel.Date;
-    calloriLabel.text = [NSString stringWithFormat:@"Cariello: %@", self.dailyStepsModel.Cariello];
-    distanceLabel.text = [NSString stringWithFormat:@"Distance: %@", self.dailyStepsModel.Distance];
-    stepsLabel.text = [NSString stringWithFormat:@"Steps: %lu", (unsigned long)self.dailyStepsModel.Steps];
+    if (indexPath.row == 0) {
+        if (self.dailyStepsModel) {
+            dateLabel.text = self.dailyStepsModel.Date;
+            calloriLabel.text = [NSString stringWithFormat:@"Cariello: %@", self.dailyStepsModel.Cariello];
+            distanceLabel.text = [NSString stringWithFormat:@"Distance: %@", self.dailyStepsModel.Distance];
+            stepsLabel.text = [NSString stringWithFormat:@"Steps: %lu", (unsigned long)self.dailyStepsModel.Steps];
+        } else {
+            dateLabel.text = @"No Activity Data";
+            calloriLabel.text = @"";
+            distanceLabel.text = @"";
+            stepsLabel.text = @"";
+        }
+    } else if (indexPath.row == 1) {
+        if (self.fallDownModel) {
+            dateLabel.text = @"Fall Down Alert";
+            calloriLabel.text = self.fallDownModel.SerialNumber;
+            distanceLabel.text = self.fallDownModel.ExceptionName;
+            stepsLabel.text = self.fallDownModel.Message;
+        } else {
+            dateLabel.text = @"No Fall Down Alert";
+            calloriLabel.text = @"";
+            distanceLabel.text = @"";
+            stepsLabel.text = @"";
+        }
+    }
+    
     return cell;
 }
 
@@ -109,6 +139,7 @@
             if (listModel.Items.count && ![AWDataHelper shared].device) {
                 [AWDataHelper shared].device = listModel.Items.firstObject;
                 [self getDailyHealthData];
+                [self getExceptionList];
             }
         }
         
@@ -144,6 +175,78 @@
                 self.dailyStepsModel = model.Items.firstObject;
                 [self.infoTableView reloadData];
             }
+        }
+        
+    } failure:^(NSString * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+//获取报警信息ExceptionMessage/ExcdeptionListWhitoutCode
+//入口参数    {"Id":1548,"PageNo":1,"PageCount":10,"TypeID":0,"MapType":"google","DataCode":null,"UserID":0,"Exclude":null,"Language":"zh-cn","TimeOffset":8.0,"AppId":"188"}
+
+
+- (void)getExceptionList {
+    if ([AWDataHelper shared].device == nil) {
+        return;
+    }
+    [self.dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+
+    [dict setObject:@"212" forKey:@"AppId"];
+    [dict setObject:@1 forKey:@"PageNo"];
+    [dict setObject:@10 forKey:@"PageCount"];
+    [dict setObject:@"Google" forKey:@"MapType"];
+    [dict setObject:[AWDataHelper shared].device.Id forKey:@"DeviceId"];
+    [dict setObject:[AWDataHelper shared].user.Item.UserId forKey:@"Id"];
+    [dict setObject:@"en" forKey:@"Language"];
+    [dict setObject:@0 forKey:@"TimeOffset"];
+    [[AWNetwork sharedInstance] POST:@"ExceptionMessage/ExcdeptionListWhitoutCode" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
+        NSInteger code = [[responseObject objectForKey:@"State"] intValue];
+        if (code == 0) {
+            AWExceptionMessageListModel *model = [AWExceptionMessageListModel yy_modelWithDictionary:responseObject];
+            for (AWExceptionMessageModel *ec in model.Items) {
+                if (ec.NotificationType == 139) {
+                    self.fallDownModel = ec;
+                    [self.infoTableView reloadData];
+                    break;
+                }
+            }
+        }
+        
+    } failure:^(NSString * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+//"Params": "",
+//"Token": "",
+//"Language": "zh-Hans-CN",
+//"TimeOffset": 8,
+//"DeviceId": 4975,
+//"IsNewCmdFormat": 1,
+//"CmdCode": "0031",
+//"DeviceModel": 10,
+//"AppId": "188"
+- (IBAction)sendTakePhotoCmd:(id)sender {
+    if ([AWDataHelper shared].device == nil) {
+        return;
+    }
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+
+    [dict setObject:@"212" forKey:@"AppId"];
+    [dict setObject:@1 forKey:@"IsNewCmdFormat"];
+    [dict setObject:@([AWDataHelper shared].device.Model) forKey:@"DeviceModel"];
+    [dict setObject:@"0031" forKey:@"CmdCode"];
+    [dict setObject:[AWDataHelper shared].device.Id forKey:@"DeviceId"];
+    [dict setObject:[AWDataHelper shared].user.Item.UserId forKey:@"Id"];
+    [dict setObject:@"en" forKey:@"Language"];
+    [dict setObject:@0 forKey:@"TimeOffset"];
+    [[AWNetwork sharedInstance] POST:@"Command/SendCommand" parameters:dict success:^(NSDictionary*  _Nullable responseObject) {
+        NSInteger code = [[responseObject objectForKey:@"State"] intValue];
+        if (code == 0) {
+            
         }
         
     } failure:^(NSString * _Nonnull error) {

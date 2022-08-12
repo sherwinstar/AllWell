@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Login";
     self.loginView.backgroundColor = [UIColor colorWithRGB:0xF8F8F8];
     [self.loginButton setBackgroundColor:[UIColor colorWithRGB:0x3385FF]];
     self.loginView.layer.cornerRadius = 6.0;

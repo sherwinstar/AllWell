@@ -23,6 +23,7 @@
 @property(nonatomic, strong)AWExceptionMessageModel *fallDownModel;
 @property (nonatomic, weak)IBOutlet UITableView *infoTableView;
 @property (nonatomic, weak)IBOutlet UIButton *takePhotoButton;
+@property (nonatomic, weak)IBOutlet UIButton *callButton;
 
 @end
 
@@ -34,6 +35,9 @@
     [self.takePhotoButton setBackgroundColor:[UIColor colorWithRGB:0x3385FF]];
     self.takePhotoButton.layer.cornerRadius = 20;
     [self.takePhotoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.callButton setBackgroundColor:[UIColor colorWithRGB:0x3385FF]];
+    self.callButton.layer.cornerRadius = 20;
+    [self.callButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.dateFormatter = [[NSDateFormatter alloc] init];
     if (![[AWDataHelper shared] hasLogined]) {
         UIViewController *loginController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginNav"];
@@ -41,7 +45,7 @@
         [self.navigationController presentViewController:loginController animated:NO completion:nil];
     }
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"My watches" style:UIBarButtonItemStyleDone target:self action:@selector(viewWatches:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"My Watches" style:UIBarButtonItemStyleDone target:self action:@selector(viewWatches:)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -234,6 +238,19 @@
 //"CmdCode": "0031",
 //"DeviceModel": 10,
 //"AppId": "188"
+
+- (IBAction)callAction:(id)sender {
+    if ([AWDataHelper shared].device == nil) {
+        return;
+    }
+    if ([AWDataHelper shared].device.Sim.length == 0) {
+        [self.view makeToast:@"Please fill the sim of watch" duration:2.0 position:CSToastPositionCenter];
+        return;
+    }
+    NSString * phone = [NSString stringWithFormat:@"telprompt://%@",[AWDataHelper shared].device.Sim];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phone] options:@{} completionHandler:nil];
+}
+
 - (IBAction)sendTakePhotoCmd:(id)sender {
     if ([AWDataHelper shared].device == nil) {
         return;

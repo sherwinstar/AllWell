@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSUInteger Model;
 @property (nonatomic, assign) NSUInteger TypeValue;
 @property (nonatomic, copy) NSString *Id;
+@property (nonatomic, copy) NSString *Sim;
 @property (nonatomic, assign) NSUInteger UserGroupId;
 @property (nonatomic, assign) CGFloat Latitude;
 @property (nonatomic, assign) CGFloat Longitude;

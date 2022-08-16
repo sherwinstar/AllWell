@@ -48,8 +48,8 @@
     [dict setObject:@"212" forKey:@"AppId"];
     [dict setObject:@"Google" forKey:@"MapType"];
     [dict setObject:@1 forKey:@"GroupId"];
-    [dict setObject:@"zh-cn" forKey:@"Language"];
-    [dict setObject:@8 forKey:@"TimeOffset"];
+    [dict setObject:@"en" forKey:@"Language"];
+    [dict setObject:@0 forKey:@"TimeOffset"];
 
 //    [dict setObject:@"allwellapp" forKey:@"LoginName"];
 //    [dict setObject:@"10" forKey:@"GroupId"];

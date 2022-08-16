@@ -14,7 +14,6 @@
 		4868AD982897EC74001E400E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4868AD972897EC74001E400E /* Assets.xcassets */; };
 		4868AD9B2897EC74001E400E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4868AD992897EC74001E400E /* LaunchScreen.storyboard */; };
 		4868AD9E2897EC74001E400E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4868AD9D2897EC74001E400E /* main.m */; };
-		4868B05A2897EF8D001E400E /* AWDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4868B0592897EF8D001E400E /* AWDetailViewController.m */; };
 		4868B06E2898277B001E400E /* NSMutableDictionary+AW.m in Sources */ = {isa = PBXBuildFile; fileRef = 4868B0632898277B001E400E /* NSMutableDictionary+AW.m */; };
 		4868B06F2898277B001E400E /* UIImageView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 4868B0642898277B001E400E /* UIImageView+Loading.m */; };
 		4868B0702898277B001E400E /* NSDictionary+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4868B0652898277B001E400E /* NSDictionary+Utils.m */; };
@@ -34,6 +33,8 @@
 		4897425C28A2B92B00A3C162 /* AWDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4897425B28A2B92B00A3C162 /* AWDevicesViewController.m */; };
 		4897425F28A2B94C00A3C162 /* AWAddDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4897425E28A2B94C00A3C162 /* AWAddDeviceViewController.m */; };
 		4897426228A3681700A3C162 /* AWRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4897426128A3681700A3C162 /* AWRegisterViewController.m */; };
+		48F35F6528ABF49200DF25CB /* AWProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F35F6428ABF49200DF25CB /* AWProfileViewController.m */; };
+		48F35F6828ABF6D300DF25CB /* AWUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F35F6728ABF6D300DF25CB /* AWUserInfoModel.m */; };
 		F8E62F31B3D16F0CBFDBE332 /* Pods_AllWell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1365069E0F41FC94095C2D89 /* Pods_AllWell.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,8 +52,6 @@
 		4868AD9A2897EC74001E400E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4868AD9C2897EC74001E400E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4868AD9D2897EC74001E400E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4868B0582897EF8D001E400E /* AWDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWDetailViewController.h; sourceTree = "<group>"; };
-		4868B0592897EF8D001E400E /* AWDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWDetailViewController.m; sourceTree = "<group>"; };
 		4868B05C2898277B001E400E /* UIView+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Size.h"; sourceTree = "<group>"; };
 		4868B05D2898277B001E400E /* NSDictionary+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Utils.h"; sourceTree = "<group>"; };
 		4868B05E2898277B001E400E /* NSMutableArray+AW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+AW.h"; sourceTree = "<group>"; };
@@ -92,6 +91,10 @@
 		4897425E28A2B94C00A3C162 /* AWAddDeviceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWAddDeviceViewController.m; sourceTree = "<group>"; };
 		4897426028A3681700A3C162 /* AWRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWRegisterViewController.h; sourceTree = "<group>"; };
 		4897426128A3681700A3C162 /* AWRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWRegisterViewController.m; sourceTree = "<group>"; };
+		48F35F6328ABF49200DF25CB /* AWProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWProfileViewController.h; sourceTree = "<group>"; };
+		48F35F6428ABF49200DF25CB /* AWProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWProfileViewController.m; sourceTree = "<group>"; };
+		48F35F6628ABF6D300DF25CB /* AWUserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWUserInfoModel.h; sourceTree = "<group>"; };
+		48F35F6728ABF6D300DF25CB /* AWUserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWUserInfoModel.m; sourceTree = "<group>"; };
 		9CB0381DBBFFC0C5C2BB83C9 /* Pods-AllWell.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllWell.release.xcconfig"; path = "Target Support Files/Pods-AllWell/Pods-AllWell.release.xcconfig"; sourceTree = "<group>"; };
 		D7A932AA591C17C47BB39541 /* Pods-AllWell.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllWell.debug.xcconfig"; path = "Target Support Files/Pods-AllWell/Pods-AllWell.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -139,8 +142,6 @@
 				4868AD8F2897EC72001E400E /* SceneDelegate.m */,
 				4868AD912897EC72001E400E /* AWMainViewController.h */,
 				4868AD922897EC72001E400E /* AWMainViewController.m */,
-				4868B0582897EF8D001E400E /* AWDetailViewController.h */,
-				4868B0592897EF8D001E400E /* AWDetailViewController.m */,
 				4868AD942897EC72001E400E /* Main.storyboard */,
 				4868AD972897EC74001E400E /* Assets.xcassets */,
 				4868AD992897EC74001E400E /* LaunchScreen.storyboard */,
@@ -154,6 +155,8 @@
 				4897425E28A2B94C00A3C162 /* AWAddDeviceViewController.m */,
 				4897426028A3681700A3C162 /* AWRegisterViewController.h */,
 				4897426128A3681700A3C162 /* AWRegisterViewController.m */,
+				48F35F6328ABF49200DF25CB /* AWProfileViewController.h */,
+				48F35F6428ABF49200DF25CB /* AWProfileViewController.m */,
 			);
 			path = AllWell;
 			sourceTree = "<group>";
@@ -213,6 +216,8 @@
 				488C5FAC28A5FFD200562B31 /* AWStepsForDayModel.m */,
 				488C5FAE28A6880C00562B31 /* AWExceptionMessageListModel.h */,
 				488C5FAF28A6880C00562B31 /* AWExceptionMessageListModel.m */,
+				48F35F6628ABF6D300DF25CB /* AWUserInfoModel.h */,
+				48F35F6728ABF6D300DF25CB /* AWUserInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -364,10 +369,11 @@
 				4868AD9E2897EC74001E400E /* main.m in Sources */,
 				48973F9C28997E3200A3C162 /* AWUserModel.m in Sources */,
 				4868B0722898277B001E400E /* NSString+Utils.m in Sources */,
-				4868B05A2897EF8D001E400E /* AWDetailViewController.m in Sources */,
 				48974259289D691800A3C162 /* AWDeviceModel.m in Sources */,
+				48F35F6528ABF49200DF25CB /* AWProfileViewController.m in Sources */,
 				4897425F28A2B94C00A3C162 /* AWAddDeviceViewController.m in Sources */,
 				48973F9828997D6D00A3C162 /* AWDataHelper.m in Sources */,
+				48F35F6828ABF6D300DF25CB /* AWUserInfoModel.m in Sources */,
 				4897425C28A2B92B00A3C162 /* AWDevicesViewController.m in Sources */,
 				488C5FAD28A5FFD200562B31 /* AWStepsForDayModel.m in Sources */,
 				4868AD902897EC72001E400E /* SceneDelegate.m in Sources */,
@@ -529,7 +535,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.linhua.allwell;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hipc.helper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -558,7 +564,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.linhua.allwell;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hipc.helper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = 1;

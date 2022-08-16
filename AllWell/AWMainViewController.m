@@ -16,6 +16,7 @@
 #import "AWStepsForDayModel.h"
 #import "AWExceptionMessageListModel.h"
 #import <Toast/UIView+Toast.h>
+#import "AWProfileViewController.h"
 
 @interface AWMainViewController ()
 @property(nonatomic, strong)NSDateFormatter *dateFormatter;
@@ -39,19 +40,19 @@
     self.callButton.layer.cornerRadius = 20;
     [self.callButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.dateFormatter = [[NSDateFormatter alloc] init];
-    if (![[AWDataHelper shared] hasLogined]) {
-        UIViewController *loginController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginNav"];
-        loginController.modalPresentationStyle = UIModalPresentationFullScreen;
-        [self.navigationController presentViewController:loginController animated:NO completion:nil];
-    }
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"My Watches" style:UIBarButtonItemStyleDone target:self action:@selector(viewWatches:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Profile" style:UIBarButtonItemStyleDone target:self action:@selector(viewProfile:)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (![[AWDataHelper shared] hasLogined])
+    if (![[AWDataHelper shared] hasLogined]) {
+        UIViewController *loginController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginNav"];
+        loginController.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self.navigationController presentViewController:loginController animated:NO completion:nil];
         return;
+    }
     if ([AWDataHelper shared].user.Item.DeviceCount == 0 && [AWDataHelper shared].shouldAddDevice && ![AWDataHelper shared].device) {
         [AWDataHelper shared].shouldAddDevice = NO;
         [self goAddDevice];
@@ -64,6 +65,11 @@
     } else if ([AWDataHelper shared].shouldAddDevice == NO) {
         [self getDeviceList];
     }
+}
+
+- (void)viewProfile:(id)sender {
+    AWProfileViewController *controller = [AWProfileViewController viewController];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)goAddDevice {

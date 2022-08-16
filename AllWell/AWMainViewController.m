@@ -61,6 +61,8 @@
     } else if ([AWDataHelper shared].device) {
         [self getDailyHealthData];
         [self getExceptionList];
+    } else if ([AWDataHelper shared].shouldAddDevice == NO) {
+        [self getDeviceList];
     }
 }
 
@@ -228,16 +230,6 @@
         NSLog(@"%@", error);
     }];
 }
-
-//"Params": "",
-//"Token": "",
-//"Language": "zh-Hans-CN",
-//"TimeOffset": 8,
-//"DeviceId": 4975,
-//"IsNewCmdFormat": 1,
-//"CmdCode": "0031",
-//"DeviceModel": 10,
-//"AppId": "188"
 
 - (IBAction)callAction:(id)sender {
     if ([AWDataHelper shared].device == nil) {

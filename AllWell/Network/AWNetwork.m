@@ -76,8 +76,9 @@ const static NSString *baseURL = @"https://api.sograce.ltd:8443/api";
 
 - (void) handleResponse:(NSDictionary *)responseObject success:(nullable void (^)(id _Nullable responseObject))success failure:(nullable void (^)(NSString *error))failure {
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
-        NSInteger code = [[responseObject objectForKey:@"State"] intValue];
-        NSString *message = [responseObject objectForKey:@"Message"];
+//        NSInteger code = [[responseObject objectForKey:@"State"] intValue];
+//        NSString *message = [responseObject objectForKey:@"Message"];
+        NSLog(@"%@", responseObject);
         if (success) {
             success(responseObject);
         }

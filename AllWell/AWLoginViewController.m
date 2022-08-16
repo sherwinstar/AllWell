@@ -30,7 +30,13 @@
     self.loginView.layer.cornerRadius = 6.0;
     self.loginButton.layer.cornerRadius = 20;
     [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dissTap:)];
+    [self.view addGestureRecognizer:tapGesture];
     // Do any additional setup after loading the view.
+}
+
+- (void)dissTap:(id)sender {
+    [self.view endEditing:YES];
 }
 
 - (IBAction)loginAction:(id)sender {
